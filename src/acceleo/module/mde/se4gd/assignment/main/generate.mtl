@@ -1,0 +1,36 @@
+[comment encoding = UTF-8 /]
+[module generate('https://it.disim.mde2223/webapplication')]
+
+
+[template public generateElement(aWebApplication : Web::WebApplication)]
+[comment @main/]
+
+[file (aWebApplication.name, false, 'UTF-8')]
+
+The application name is [aWebApplication.name/]
+### FIRST PART ###
+
+[for (e : Entity| self.entities)]
+CREATE Table [e.name/] ( [for (i : Attribute | self.attributes) separator (', ')][i.name/] [i.type/] [/for]);
+[/for]
+
+
+### SECOND PART ###
+
+[for (e: Entity| self.entities)]
+SELECT [for (i : Attribute | self.attributes -> select(e | e.name = 'headline')) separator (', ')][i.name/] [/for] FROM [e.name/];
+[/for]
+
+
+### THIRD PART ###
+
+[for (e : Entity | self.entities)]
+	[for (i : Attribute | self.attributes -> select(i | i.isPK = true))]		
+SELECT [i.name/] FROM [e.name/] WHERE [i.name/] == "Search this word";
+	[/for]
+[/for]
+
+[/file]
+[/template]
+
+

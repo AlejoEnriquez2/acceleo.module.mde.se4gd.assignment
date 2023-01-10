@@ -1,0 +1,18 @@
+
+The application name is News Website
+### FIRST PART ###
+
+CREATE Table news ( headline String );
+CREATE Table Sports ( players int , score String , headline String );
+
+
+### SECOND PART ###
+
+SELECT headline  FROM news;
+SELECT headline  FROM Sports;
+
+
+### THIRD PART ###
+
+SELECT headline FROM news WHERE headline == "Search this word";
+
